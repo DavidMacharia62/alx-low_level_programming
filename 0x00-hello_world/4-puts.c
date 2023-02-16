@@ -1,6 +1,8 @@
-/* A c program that outputs '"Programming is like building a multilingual puzzle' */
-/* Created by David Macharia for the alx Software Engineering course */
-/* main - returns 0 if there is no error */
+/**
+ * main- Entry point
+ * Description: A C program that prints with put function
+ * Return: Always 0 (Success)
+ */
 
 #include <stdio.h>
 
