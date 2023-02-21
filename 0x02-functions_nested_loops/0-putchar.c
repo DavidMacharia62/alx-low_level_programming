@@ -4,7 +4,7 @@
  * returns 0 when successfully run
  * */
 
-#include <main.h>
+#include "main.h"
 
 int main(void)
 {
