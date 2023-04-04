@@ -1,44 +1,74 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - This C function frees a linked list.
+ * free_listp2 - This function frees a linked list
  *
- * @h: pointer to the first node in the linked list to be freed.
+ * @head: head of the ilnked list to be freed.
  *
- * Return: number of elements in the newly freed list.
+ * Return: no return.
  */
 
+void free_listp2(listp_t **head)
+{
+	listp_t *tmp;
+	listp_t *cur;
+
+	if (head != NULL)
+	{
+		cur = *head;
+		while ((tmp = cur) != NULL)
+		{
+			cur = cur->next;
+			free(tmp);
+		}
+		*head = NULL;
+	}
+}
+
+/**
+ * free_listint_safe - frees a linked list.
+ * @h: head of a list.
+ *
+ * Return: size of the list that was freed.
+ */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t length = 0;
-	int dif;
-	listint_t *temp;
+	size_t nnodes = 0;
+	listp_t *hptr, *new, *add;
+	listint_t *cur;
 
-
-	if (!h || !*h)
-		return (0);
-
-
-	while (*h)
+	hptr = NULL;
+	while (*h != NULL)
 	{
-		dif = *h - (*h)->next;
-		if (dif > 0)
+		new = malloc(sizeof(listp_t));
+
+		if (new == NULL)
+			exit(98);
+
+		new->p = (void *)*h;
+		new->next = hptr;
+		hptr = new;
+
+		add = hptr;
+
+		while (add->next != NULL)
 		{
-			temp = (*h)->next;
-			free(*h);
-			*h = temp;
-			length++;
+			add = add->next;
+			if (*h == add->p)
+			{
+				*h = NULL;
+				free_listp2(&hptr);
+				return (nnodes);
+			}
 		}
-		else
-		{
-			free(*h);
-			*h = NULL;
-			length++;
-			break;
-		}
+
+		cur = *h;
+		*h = (*h)->next;
+		free(cur);
+		nnodes++;
 	}
 
 	*h = NULL;
-
-	return (length);
+	free_listp2(&hptr);
+	return (nnodes);
 }
