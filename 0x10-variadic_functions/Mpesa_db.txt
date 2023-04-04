@@ -1,0 +1,8 @@
+USE Mpesa_db;
+CREATE TABLE messages (
+    id INT PRIMARY KEY,
+    transaction_type VARCHAR(50),
+    amount INT,
+    transaction_date VARCHAR(100)
+);
+
