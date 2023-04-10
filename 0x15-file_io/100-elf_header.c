@@ -65,18 +65,18 @@ void print_type(char *ptr)
 		file_type = ptr[17];
 
 	printf("  Type:                              ");
-	if (type == 0)
+	if (file_type == 0)
 		printf("NONE (No file type)\n");
-	else if (type == 1)
+	else if (file_type == 1)
 		printf("REL (Relocatable file)\n");
-	else if (type == 2)
+	else if (file_type == 2)
 		printf("EXEC (Executable file)\n");
-	else if (type == 3)
+	else if (file_type == 3)
 		printf("DYN (Shared object file)\n");
-	else if (type == 4)
+	else if (file_type == 4)
 		printf("CORE (Core file)\n");
 	else
-		printf("<unknown: %x>\n", type);
+		printf("<unknown: %x>\n", file_type);
 }
 
 /**
@@ -159,18 +159,18 @@ void print_magic(char *ptr)
  */
 void check_sys(char *ptr)
 {
-	char sys = ptr[4] + '0';
+	char syst = ptr[4] + '0';
 
-	if (sys == '0')
+	if (syst == '0')
 		exit(98);
 
 	printf("ELF Header:\n");
 	print_magic(ptr);
 
-	if (sys == '1')
+	if (syst == '1')
 		printf("  Class:                             ELF32\n");
 
-	if (sys == '2')
+	if (syst == '2')
 		printf("  Class:                             ELF64\n");
 
 	print_data(ptr);
@@ -241,5 +241,5 @@ int main(int argc, char *argv[])
 	check_sys(ptr);
 	close(fd);
 
-	return (0);
+	return 0;
 }
