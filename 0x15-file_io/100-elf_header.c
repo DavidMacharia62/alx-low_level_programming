@@ -5,9 +5,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <elf.h>
-
 /**
- * print_addr - prints address
+ * print_addr - A function that prints address
  * @ptr: magic.
  * Return: no return.
  */
@@ -52,8 +51,8 @@ void print_addr(char *ptr)
 }
 
 /**
- * print_type - prints type
- * @ptr: magic.
+ * print_type - A function that prints type
+ * @ptr: A pointer magic.
  * Return: no return.
  */
 void print_type(char *ptr)
@@ -66,23 +65,23 @@ void print_type(char *ptr)
 		file_type = ptr[17];
 
 	printf("  Type:                              ");
-	if (file_type == 0)
+	if (type == 0)
 		printf("NONE (No file type)\n");
-	else if (file_type == 1)
+	else if (type == 1)
 		printf("REL (Relocatable file)\n");
-	else if (file_type == 2)
+	else if (type == 2)
 		printf("EXEC (Executable file)\n");
-	else if (file_type == 3)
+	else if (type == 3)
 		printf("DYN (Shared object file)\n");
-	else if (file_type == 4)
+	else if (type == 4)
 		printf("CORE (Core file)\n");
 	else
-		printf("<unknown: %x>\n", file_type);
+		printf("<unknown: %x>\n", type);
 }
 
 /**
- * print_osabi - prints osabi
- * @ptr: magic.
+ * print_osabi - This function prints osabi
+ * @ptr: pointer magic.
  * Return: no return.
  */
 void print_osabi(char *ptr)
@@ -160,18 +159,18 @@ void print_magic(char *ptr)
  */
 void check_sys(char *ptr)
 {
-	char syst = ptr[4] + '0';
+	char sys = ptr[4] + '0';
 
-	if (syst == '0')
+	if (sys == '0')
 		exit(98);
 
 	printf("ELF Header:\n");
 	print_magic(ptr);
 
-	if (syst == '1')
+	if (sys == '1')
 		printf("  Class:                             ELF32\n");
 
-	if (syst == '2')
+	if (sys == '2')
 		printf("  Class:                             ELF64\n");
 
 	print_data(ptr);
